@@ -4,19 +4,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     chrome.tabs.getSelected(null, function(tab) {
-      document = document;
+      d = document;
 
-      var form = document.createElement('form');
+      var f = d.createElement('form');
       f.action = 'http://gtmetrix.com/analyze.html?bm';
       f.method = 'post';
 
-      var input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = 'url';
-      input.value = tab.url;
-      form.appendChild(input);
-      document.body.appendChild(form);
-      form.submit();
+      var i = d.createElement('input');
+      i.type = 'hidden';
+      i.name = 'url';
+      i.value = tab.url;
+      f.appendChild(i);
+      d.body.appendChild(f);
+      f.submit();
     });
   }, false);
 }, false);
