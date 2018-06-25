@@ -5,13 +5,15 @@
   "name": "Easy Auto Like Plugin",
   "description": "Google Chrome Extension for automatically liking whitelisted Youtube channels",
   "version": "1.0",
-
-
+  "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+  "options_page": "options.html",
   "browser_action": {
     "default_icon": "icon.png",
-    "default_popup": "index.html"
+    "default_popup": "popup.html"
   },
-  "permissions": [
-    "activeTab"
-  ]
+  "permissions": ["activeTab", "declarativeContent", "storage"]
+
 }

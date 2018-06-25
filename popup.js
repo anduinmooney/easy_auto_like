@@ -1,22 +1,17 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var testPageButton = document.getElementById('testPage');
-  testPageButton.addEventListener('click', function() {
+let changeColor = document.getElementById('changeColor');
+
+chrome.storage.sync.get('color', function(data) {
+  changeColor.style.backgroundColor = data.color;
+  changeColor.setAttribute('value', data.color);
 
 
-    chrome.tabs.getSelected(null, function(tab) {
-      d = document;
+});
 
-      var f = d.createElement('form');
-      f.action = 'http://gtmetrix.com/analyze.html?bm';
-      f.method = 'post';
-
-      var i = d.createElement('input');
-      i.type = 'hidden';
-      i.name = 'url';
-      i.value = tab.url;
-      f.appendChild(i);
-      d.body.appendChild(f);
-      f.submit();
-    });
-  }, false);
-}, false);
+changeColor.onclick = function(element) {
+  let color = element.target.value;
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.executeScript(
+        tabs[0].id,
+        {code: 'document.body.style.backgroundColor = "' + color + '";'});
+  });
+};
